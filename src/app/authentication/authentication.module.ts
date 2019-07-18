@@ -5,6 +5,9 @@ import { AuthRouting } from './authentication.routing';
 import { SharedsModule } from '../shareds/shareds.module';
 import { SettingComponent } from './components/setting/setting.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BootstrapElementsComponent } from './components/bootstrap-elements/bootstrap-elements.component';
+import { CardsComponent } from './components/cards/cards.component';
+import { WidgetsComponent } from './components/widgets/widgets.component';
 
 
 
@@ -13,6 +16,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     DashboardComponent,
     SettingComponent,
     ProfileComponent,
+    BootstrapElementsComponent,
+    CardsComponent,
+    WidgetsComponent,
   ],
   imports: [
     AuthRouting,
