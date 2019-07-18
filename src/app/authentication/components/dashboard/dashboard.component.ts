@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 declare const $;
 declare const Chart;
-declare const App;
-
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +15,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.initialLoadCharJs();
-    App.initialLoadPage();
   }
 
   private initialLoadCharJs() {

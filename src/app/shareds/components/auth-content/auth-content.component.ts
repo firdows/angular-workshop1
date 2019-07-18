@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+declare const $;
+declare const App;
 
 @Component({
   selector: 'app-auth-content',
@@ -10,6 +12,7 @@ export class AuthContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    App.initialLoadPage();
   }
 
 }
