@@ -11,7 +11,7 @@
 
     <ul class="app-menu">
         <li>
-            <a class="app-menu__item active" [routerLink]="['/']">
+            <a class="app-menu__item active" [routerLink]="['/',AppUrl.Authen,AuthUrl.Dashboard]">
                 <i class="app-menu__icon fa fa-dashboard"></i>
                 <span class="app-menu__label">หน้าแรก</span>
             </a>
@@ -25,13 +25,13 @@
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="treeview-item" [routerLink]="['/']">
+                    <a class="treeview-item"  [routerLink]="['/',AppUrl.Authen,AuthUrl.Members]">
                         <i class="icon fa fa-circle-o"></i>
                         รายการสมาชิก
                     </a>
                 </li>
                 <li>
-                    <a class="treeview-item" [routerLink]="['/']">
+                    <a class="treeview-item"  [routerLink]="['/',AppUrl.Authen,AuthUrl.MemberCreate]">
                         <i class="icon fa fa-circle-o"></i> เพิ่มสมาชิก
                     </a>
                 </li>

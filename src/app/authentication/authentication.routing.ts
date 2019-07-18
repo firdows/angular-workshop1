@@ -6,6 +6,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { BootstrapElementsComponent } from './components/bootstrap-elements/bootstrap-elements.component';
 import { WidgetsComponent } from './components/widgets/widgets.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { MembersComponent } from './components/members/members.component';
+import { MemberCreateComponent } from './components/member-create/member-create.component';
 
 const RouteLists: Routes = [
   { path: '', redirectTo: AuthUrl.Dashboard, pathMatch: 'full' },
@@ -15,6 +17,8 @@ const RouteLists: Routes = [
   { path: AuthUrl.BootstrapElement, component: BootstrapElementsComponent },
   { path: AuthUrl.Cards, component: CardsComponent },
   { path: AuthUrl.Widgets, component: WidgetsComponent },
+  { path: AuthUrl.Members, component: MembersComponent },
+  { path: AuthUrl.MemberCreate, component: MemberCreateComponent },
 ];
 
 export const AuthRouting = RouterModule.forChild(RouteLists);

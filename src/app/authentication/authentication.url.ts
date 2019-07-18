@@ -5,4 +5,6 @@ export const AuthUrl = {
   BootstrapElement: 'bootstrap-element',
   Cards: 'cards',
   Widgets: 'widgets',
+  Members:'members',
+  MemberCreate:'member-create',
 };
