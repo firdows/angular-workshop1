@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppRouting } from './app.routing';
 declare const App: any;
 
 @Component({
@@ -12,4 +13,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     App.initialLoadPage();
   }
+
+  
 }
