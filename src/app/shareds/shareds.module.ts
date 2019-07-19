@@ -5,6 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { AuthNavbarComponent } from './components/auth-navbar/auth-navbar.component';
 import { AuthSidebarComponent } from './components/auth-sidebar/auth-sidebar.component';
 import { AuthContentComponent } from './components/auth-content/auth-content.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -17,11 +18,15 @@ import { AuthContentComponent } from './components/auth-content/auth-content.com
   imports: [
     CommonModule,
     BsDropdownModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     BsDropdownModule,
     AuthContentComponent,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class SharedsModule { }
