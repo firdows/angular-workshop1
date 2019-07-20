@@ -6,6 +6,7 @@ import { AuthNavbarComponent } from './components/auth-navbar/auth-navbar.compon
 import { AuthSidebarComponent } from './components/auth-sidebar/auth-sidebar.component';
 import { AuthContentComponent } from './components/auth-content/auth-content.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AlertService } from './services/alert.service';
 
 
 
@@ -27,6 +28,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     AuthContentComponent,
     ReactiveFormsModule,
     FormsModule
+  ],
+  providers: [
+    AlertService
   ]
 })
 export class SharedsModule { }

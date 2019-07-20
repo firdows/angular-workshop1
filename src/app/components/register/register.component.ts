@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppUrl } from 'src/app/app.url';
 import { IRegisterComponent } from './register.interface';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { AlertService } from 'src/app/shareds/services/alert.service';
+
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class RegisterComponent implements IRegisterComponent {
   constructor(
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private alert: AlertService
+
   ) {
     this.initialCreateFormData();
 
@@ -21,18 +25,25 @@ export class RegisterComponent implements IRegisterComponent {
 
   //ลงทะเบียน
   onSubmit() {
-    console.log(this.form.value);
-    //throw new Error("Method not implemented.");
+    if (this.form.invalid) {
+      this.alert.someting_wrong();
+    }
+    if (this.form.valid) {
+      console.log(this.form.valid);
+      console.log(this.form.value);
+      //throw new Error("Method not implemented.");
+    }
   }
 
   private initialCreateFormData() {
     this.form = this.builder.group({
-      firstname: [],
-      lastname: [],
-      email: [],
-      password: [],
-      cpassword: []
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      cpassword: ['', [Validators.required]],
     });
   }
+
 
 }
