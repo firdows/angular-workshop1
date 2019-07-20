@@ -41,9 +41,24 @@ export class RegisterComponent implements IRegisterComponent {
       lastname: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      cpassword: ['', [Validators.required]],
+      cpassword: ['', [Validators.required, this.comparePassword('password')]],
     });
   }
 
+  //Create validate custom
+  private comparePassword(passwordField: string) {
+    return function (comfirm_password: AbstractControl) {
+      if (!comfirm_password.parent) return;
+      const password = comfirm_password.parent.get(passwordField);
+      const passwordSubscripe = password.valueChanges.subscribe(() => {
+        comfirm_password.updateValueAndValidity();
+        passwordSubscripe.unsubscribe();
+      });
+      if (comfirm_password.value === password.value) {
+        return;
+      }
+      return { compare: true };
+    }
+  }
 
 }
