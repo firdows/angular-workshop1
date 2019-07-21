@@ -30,14 +30,27 @@ export class ProfileComponent implements IProfileComponent {
 
     // Save Profile
     onSubmit(): void {
+        if (this.form.invalid) {
+            return this.alert.someting_wrong();
+        }
+
         //this.form = this.builder.group
         console.log(this.form.value);
     }
 
     onConvertImage(input: HTMLInputElement): void {
-        if (input.files.length == 0) return;
-
         const imageControl = this.form.controls['image'];
+        const imageType = ['image/jpeg', 'image/png'];
+
+        imageControl.setValue(null);
+        if (input.files.length == 0) return;
+        // Validate Type
+        if (imageType.indexOf(input.files[0].type) < 0) {
+            input.value = null;
+            return this.alert.notify('กรุณาอัพโหลดรูปภาพเท่านั้น');
+        }
+
+
         console.log(input);
         const reader = new FileReader();
         reader.readAsDataURL(input.files[0]);//convert to Base64
@@ -65,10 +78,10 @@ export class ProfileComponent implements IProfileComponent {
     private initialCreateFormData() {
         this.form = this.builder.group({
             email: [''],
-            firstname: [''],
-            lastname: [''],
-            position: [''],
-            image: [''],
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            position: ['', Validators.required],
+            image: [null],
         });
         this.form.get('email').disable();
     }
