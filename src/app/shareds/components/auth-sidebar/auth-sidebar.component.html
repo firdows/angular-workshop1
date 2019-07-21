@@ -1,7 +1,7 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside class="app-sidebar" *ngIf="UserLogin">
-    <div class="app-sidebar__user">
+<aside class="app-sidebar">
+    <div *ngIf="UserLogin" class="app-sidebar__user">
         <img *ngIf="UserLogin.image" class="app-sidebar__user-avatar" [src]="UserLogin.image" alt="User Image">
         <img *ngIf="!UserLogin.image" class="app-sidebar__user-avatar" src="assets/images/no-image-profile.png"
             alt="User Image">
