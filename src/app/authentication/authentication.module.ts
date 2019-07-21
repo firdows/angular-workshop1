@@ -10,6 +10,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { WidgetsComponent } from './components/widgets/widgets.component';
 import { MembersComponent } from './components/members/members.component';
 import { MemberCreateComponent } from './components/member-create/member-create.component';
+import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 
 
 
@@ -23,6 +24,7 @@ import { MemberCreateComponent } from './components/member-create/member-create.
     WidgetsComponent,
     MembersComponent,
     MemberCreateComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     AuthRouting,
