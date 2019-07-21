@@ -6,7 +6,7 @@ import { ILogin } from 'src/app/components/login/login.interface';
 export class AccountService {
 
 
-    mockUserItems: IAcount[] = [
+    private mockUserItems: IAcount[] = [
         {
             id: 1,
             firstname: 'อาฮาหมัด',
@@ -25,11 +25,19 @@ export class AccountService {
             email: 'aaa@aaa.aaa',
             password: 'aaaaaa',
             position: 'Frontend Developer',
-            image: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg',
+            //image: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg',
             created: new Date(),
             updated: new Date()
         }
     ];
+
+    getUserLogin(accessToken: string) {
+        return new Promise<IAcount>((resolve, reject) => {
+            const userLogin = this.mockUserItems.find(m => m.id == accessToken);
+            if(!userLogin)return reject({Message:'Access Token ไม่ถูกต้อง'});
+            return resolve(userLogin);
+        });
+    }
 
     onLogin(model: ILogin) {
         return new Promise<{ accessToken: string }>((resolve, reject) => {
