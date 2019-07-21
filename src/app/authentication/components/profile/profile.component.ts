@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { IProfileComponent } from './profile.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shareds/services/account.service';
 import { AuthenService } from 'src/app/services/authen.service';
 import { AlertService } from 'src/app/shareds/services/alert.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements IProfileComponent {
+    modalRef: BsModalRef;
+
     constructor(
         private builder: FormBuilder,
         private account: AccountService,
         private authen: AuthenService,
         private alert: AlertService,
+        private modalService: BsModalService,
     ) {
         this.initLoadData();
         this.initialCreateFormData();
@@ -38,6 +43,11 @@ export class ProfileComponent implements IProfileComponent {
             .onUpdateProfile(this.authen.getAuthenticated(), this.form.value)
             .then(() => this.alert.notify("แก้ไขเรียบร้อย", 'info'))
             .catch(err => this.alert.notify(err.Message));
+    }
+
+    openModal(template: TemplateRef<any>) {
+        console.log(template);
+        this.modalRef = this.modalService.show(template);
     }
 
 
