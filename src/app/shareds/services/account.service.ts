@@ -19,15 +19,28 @@ export class AccountService {
             image: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg',
             created: new Date(),
             updated: new Date()
+        },
+        {
+            id: 2,
+            firstname: 'aaa',
+            lastname: 'aaa',
+            email: 'aaa@aaa.aaa',
+            password: 'aaaaaa',
+            position: 'Frontend Developer',
+            image: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg',
+            created: new Date(),
+            updated: new Date()
         }
     ];
 
     onLogin(model: ILogin) {
-        return new Promise((resolve, reject) => {
+        return new Promise<{ accessToken: string }>((resolve, reject) => {
             //resolve(model);
             const userLogin = this.mockUserItems.find(item => item.email == model.email && item.password == model.password);
             if (!userLogin) return reject({ Message: "ชื่อใช้หรือรหัสผ่านไม่ถูกต้อง" });
-            resolve(userLogin)
+            resolve({
+                accessToken: userLogin.id
+            })
             console.log(userLogin);
 
             //console.log(model);
