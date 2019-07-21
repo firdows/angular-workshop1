@@ -11,6 +11,7 @@ import { AlertService } from 'src/app/shareds/services/alert.service';
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements IProfileComponent {
+
     constructor(
         private builder: FormBuilder,
         private account: AccountService,
@@ -31,6 +32,20 @@ export class ProfileComponent implements IProfileComponent {
     onSubmit(): void {
         //this.form = this.builder.group
         console.log(this.form.value);
+    }
+
+    onConvertImage(input: HTMLInputElement): void {
+        if (input.files.length == 0) return;
+
+        const imageControl = this.form.controls['image'];
+        console.log(input);
+        const reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);//convert to Base64
+        //Listen Load Success
+        reader.addEventListener('load', () => {
+            console.log(reader.result);
+            imageControl.setValue(reader.result);
+        })
     }
 
     private initLoadData() {
@@ -57,5 +72,7 @@ export class ProfileComponent implements IProfileComponent {
         });
         this.form.get('email').disable();
     }
+
+
 
 }
