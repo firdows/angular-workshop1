@@ -3,6 +3,8 @@ import { AppUrl } from 'src/app/app.url';
 import { IRegisterComponent } from './register.interface';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AlertService } from 'src/app/shareds/services/alert.service';
+import { AccountService } from 'src/app/shareds/services/account.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +15,9 @@ import { AlertService } from 'src/app/shareds/services/alert.service';
 export class RegisterComponent implements IRegisterComponent {
   constructor(
     private builder: FormBuilder,
-    private alert: AlertService
+    private alert: AlertService,
+    private account: AccountService,
+    private router: Router
 
   ) {
     this.initialCreateFormData();
@@ -27,11 +31,20 @@ export class RegisterComponent implements IRegisterComponent {
   onSubmit() {
     if (this.form.invalid) {
       this.alert.someting_wrong();
+      console.log(this.form.errors);
     }
     if (this.form.valid) {
-      console.log(this.form.valid);
-      console.log(this.form.value);
+      // console.log(this.form.valid);
+      //console.log(this.form.value);
       //throw new Error("Method not implemented.");
+      this.account
+        .onRegister(this.form.value)
+        .then(res => {
+          this.alert.notify("ลงทะเบียนสำเร็จ",'success');
+          this.router.navigate(['/', AppUrl.Login])
+        })
+        .catch(err => this.alert.notify(err.Message));
+
     }
   }
 
@@ -40,7 +53,7 @@ export class RegisterComponent implements IRegisterComponent {
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.pattern(/^[A-z0-9]{6,15}$/)]],
       cpassword: ['', [Validators.required, this.comparePassword('password')]],
     });
   }
