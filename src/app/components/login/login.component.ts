@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppUrl } from 'src/app/app.url';
 import { ILoginComponent } from './login.interface';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AlertService } from 'src/app/shareds/services/alert.service';
 import { Router } from '@angular/router';
 import { AuthUrl } from 'src/app/authentication/authentication.url';
@@ -23,21 +23,21 @@ export class LoginComponent implements ILoginComponent {
     this.initialCreateFormData();
   }
 
-  form: import("@angular/forms").FormGroup;
+  form: FormGroup;
   Url = AppUrl;
 
   onSubmit(): void {
     if (this.form.invalid) {
       return this.notify.someting_wrong();
     }
-    //console.log(this.form.value);
+    // console.log(this.form.value);
 
 
     this.account
       .onLogin(this.form.value)
       .then(res => {
-        console.log(res);
-        //this.router.navigate(['/', AppUrl.Authen, AuthUrl.Dashboard]);
+        //console.log(res);
+        this.router.navigate(['/', AppUrl.Authen, AuthUrl.Dashboard]);
       })
       .catch(err => {
         this.notify.notify(err.Message);
