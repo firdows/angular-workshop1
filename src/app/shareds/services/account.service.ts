@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { IRegister } from 'src/app/components/register/register.interface';
 import { ILogin } from 'src/app/components/login/login.interface';
+import { IProfile } from 'src/app/authentication/components/profile/profile.interface';
 
 @Injectable()
 export class AccountService {
@@ -31,14 +32,32 @@ export class AccountService {
         }
     ];
 
+    // แก้ไขข้อมูลส่วน
+    onUpdateProfile(accessToken: string, model: IProfile) {
+        return new Promise((resolve, reject) => {
+            const userProfile = this.mockUserItems.find(user => user.id == accessToken);
+            if (!userProfile) return reject({ Message: 'ไม่พบผู้ใช้นี้ในระบบ' });
+            
+            userProfile.firstname = model.firstname;
+            userProfile.lastname = model.lastname;
+            userProfile.position = model.position;
+            userProfile.image = model.image;
+            userProfile.updated = new Date();
+            resolve(userProfile);
+        });
+    }
+
+
+    // ดึงข้อมูลคนที่เข้าใช้ระบบ
     getUserLogin(accessToken: string) {
         return new Promise<IAcount>((resolve, reject) => {
             const userLogin = this.mockUserItems.find(m => m.id == accessToken);
-            if(!userLogin)return reject({Message:'Access Token ไม่ถูกต้อง'});
+            if (!userLogin) return reject({ Message: 'Access Token ไม่ถูกต้อง' });
             return resolve(userLogin);
         });
     }
 
+    // เข้าสู่ระบบ
     onLogin(model: ILogin) {
         return new Promise<{ accessToken: string }>((resolve, reject) => {
             //resolve(model);
@@ -54,6 +73,7 @@ export class AccountService {
     }
 
 
+    // ลงทะเบียน
     onRegister(model: IRegister) {
         //console.log(model);
         return new Promise((resolve, reject) => {

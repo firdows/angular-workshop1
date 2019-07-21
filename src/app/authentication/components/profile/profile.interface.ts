@@ -5,3 +5,10 @@ export interface IProfileComponent {
     form: FormGroup;
     onSubmit(): void;
 }
+
+export interface IProfile {
+    firstname: string;
+    lastname: string;
+    position: string;
+    image: string;
+}

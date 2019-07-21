@@ -15,7 +15,7 @@ export class ProfileComponent implements IProfileComponent {
         private builder: FormBuilder,
         private account: AccountService,
         private authen: AuthenService,
-        private alert: AlertService
+        private alert: AlertService,
     ) {
         this.initLoadData();
         this.initialCreateFormData();
@@ -33,8 +33,11 @@ export class ProfileComponent implements IProfileComponent {
             return this.alert.someting_wrong();
         }
 
-        //this.form = this.builder.group
         console.log(this.form.value);
+        this.account
+            .onUpdateProfile(this.authen.getAuthenticated(), this.form.value)
+            .then(() => this.alert.notify("แก้ไขเรียบร้อย", 'info'))
+            .catch(err => this.alert.notify(err.Message));
     }
 
 
