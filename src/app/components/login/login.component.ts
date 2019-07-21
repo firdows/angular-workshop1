@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shareds/services/alert.service';
 import { Router } from '@angular/router';
 import { AuthUrl } from 'src/app/authentication/authentication.url';
+import { AccountService } from 'src/app/shareds/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements ILoginComponent {
   constructor(
     private builder: FormBuilder,
     private notify: AlertService,
-    private router: Router
+    private router: Router,
+    private account: AccountService,
   ) {
     this.initialCreateFormData();
   }
@@ -28,9 +30,19 @@ export class LoginComponent implements ILoginComponent {
     if (this.form.invalid) {
       return this.notify.someting_wrong();
     }
-    this.router.navigate(['/', AppUrl.Authen, AuthUrl.Dashboard]);
+    //console.log(this.form.value);
 
-    console.log(this.form.value);
+
+    this.account
+      .onLogin(this.form.value)
+      .then(res => {
+        console.log(res);
+        //this.router.navigate(['/', AppUrl.Authen, AuthUrl.Dashboard]);
+      })
+      .catch(err => {
+        this.notify.notify(err.Message);
+      });
+
     //throw new Error("Method not implemented.");
   }
 
