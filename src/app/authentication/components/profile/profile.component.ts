@@ -11,7 +11,6 @@ import { AlertService } from 'src/app/shareds/services/alert.service';
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements IProfileComponent {
-
     constructor(
         private builder: FormBuilder,
         private account: AccountService,
@@ -38,6 +37,7 @@ export class ProfileComponent implements IProfileComponent {
         console.log(this.form.value);
     }
 
+<<<<<<< HEAD
     onConvertImage(input: HTMLInputElement): void {
         const imageControl = this.form.controls['image'];
         const imageType = ['image/jpeg', 'image/png'];
@@ -61,6 +61,8 @@ export class ProfileComponent implements IProfileComponent {
         })
     }
 
+=======
+>>>>>>> parent of 6565702... Angular6 - 3-6 ส่วนของหน้า หลังยืนยันตัวตน (สร้างหน้า แก้ไขข้อมูลส่วนตัว Validation)
     private initLoadData() {
         this.account
             .getUserLogin(this.authen.getAuthenticated())
@@ -85,7 +87,5 @@ export class ProfileComponent implements IProfileComponent {
         });
         this.form.get('email').disable();
     }
-
-
 
 }

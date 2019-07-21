@@ -5,6 +5,7 @@ import { ILogin } from 'src/app/components/login/login.interface';
 @Injectable()
 export class AccountService {
 
+
     private mockUserItems: IAcount[] = [
         {
             id: 1,
@@ -12,7 +13,7 @@ export class AccountService {
             lastname: 'เจ๊ะดือราแม',
             email: 'admin@mail.com',
             password: '123456',
-            position: 'Frontend Development',
+            position: 'Frontend Developer',
             image: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg',
             created: new Date(),
             updated: new Date()
@@ -23,7 +24,7 @@ export class AccountService {
             lastname: 'aaa',
             email: 'aaa@aaa.aaa',
             password: 'aaaaaa',
-            position: 'Backend Development',
+            position: 'Frontend Developer',
             //image: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg',
             created: new Date(),
             updated: new Date()
@@ -33,7 +34,7 @@ export class AccountService {
     getUserLogin(accessToken: string) {
         return new Promise<IAcount>((resolve, reject) => {
             const userLogin = this.mockUserItems.find(m => m.id == accessToken);
-            if (!userLogin) return reject({ Message: 'Access Token ไม่ถูกต้อง' });
+            if(!userLogin)return reject({Message:'Access Token ไม่ถูกต้อง'});
             return resolve(userLogin);
         });
     }
